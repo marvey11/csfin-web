@@ -10,7 +10,6 @@ import { SecurityType } from "src/app/shared/models/security.model";
     styleUrls: ["./security-list.component.css"]
 })
 export class SecurityListComponent implements OnInit {
-
     securities: Security[] = [];
 
     /** Whether or not to group securities by type. */
@@ -52,7 +51,7 @@ export class SecurityListComponent implements OnInit {
         return mapping;
     }
 
-    getSorted(securities: Security[]): Security[]{
+    getSorted(securities: Security[]): Security[] {
         return securities.sort((s1: Security, s2: Security) => s1.isin.localeCompare(s2.isin));
     }
 

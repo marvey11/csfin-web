@@ -14,8 +14,9 @@
     "start": "ng serve",
     "build": "ng build",
     "lint": "ng lint --fix",
-    "prettier:check": "prettier --check src/**/*.ts",
-    "prettier:write": "prettier --write src/**/*.ts"
+    "prettier:check": "prettier --check src/**/*.{html,ts}",
+    "prettier:write": "prettier --write src/**/*.{html,ts}",
+    "pre-commit": "yarn run build && yarn run lint && yarn run prettier:write"
   },
   "dependencies": {
     "@angular/animations": "~11.2.3",
