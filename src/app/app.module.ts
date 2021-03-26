@@ -3,13 +3,13 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule, Routes } from "@angular/router";
 import { AppComponent } from "./app.component";
-import { SecurityModule } from "./modules/security/security.module";
+import { CoreModule } from "./core/core.module";
 
 const appRoutes: Routes = [];
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [BrowserModule, HttpClientModule, RouterModule.forRoot(appRoutes), SecurityModule],
+    imports: [BrowserModule, HttpClientModule, RouterModule.forRoot(appRoutes), CoreModule],
     providers: [],
     bootstrap: [AppComponent]
 })
