@@ -9,14 +9,16 @@ import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 export class AppComponent implements OnInit {
     title = "codescape-financial-web";
 
-    displayHeader = false;
+    showHeader = false;
+    showSidebar = false;
 
     constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
     ngOnInit(): void {
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
-                this.displayHeader = this.activatedRoute.firstChild?.snapshot.data.displayHeader !== false;
+                this.showHeader = this.activatedRoute.firstChild?.snapshot.data.showHeader !== false;
+                this.showSidebar = this.activatedRoute.firstChild?.snapshot.data.showSidebar !== false;
             }
         });
     }

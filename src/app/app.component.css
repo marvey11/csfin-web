@@ -6,3 +6,12 @@
   left: 0px;
   overflow: auto;
 }
+
+.main-content-with-header-and-sidebar {
+  position: absolute;
+  top: 64px;
+  right: 0px;
+  bottom: 0px;
+  left: 320px;
+  overflow: auto;
+}
