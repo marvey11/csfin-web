@@ -1,1 +1,2 @@
-export { Security } from "./security.model";
+export { Exchange, ExchangeAdapter } from "./exchange.model";
+export { Security, SecurityAdapter } from "./security.model";

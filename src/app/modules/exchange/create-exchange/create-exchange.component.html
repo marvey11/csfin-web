@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="card">
+    <h1 class="card-header">Create Security Exchange</h1>
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="row my-2">
+          <label class="col-2 col-form-label" for="exchange-name">Exchange Name:</label>
+          <div class="col-10">
+            <input
+              type="text"
+              id="exchange-name"
+              class="form-control"
+              formControlName="exchangeName"
+              minlength="3"
+              required
+            />
+          </div>
+          <div
+            *ngIf="exchangeName?.invalid && (exchangeName?.dirty || exchangeName?.touched)"
+            class="col-10 offset-2 mt-2"
+          >
+            <div *ngIf="exchangeName?.errors?.required" class="alert alert-danger m-0 px-2 py-3">
+              The Exchange Name is required.
+            </div>
+            <div *ngIf="exchangeName?.errors?.minlength" class="m-0 px-1 py-0">
+              <small class="form-text text-muted">
+                The Exchange Name must be at least {{ exchangeName?.errors?.minlength.requiredLength }} characters long.
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="row my-2">
+          <div class="col-10 offset-2">
+            <button type="submit" class="btn btn-danger" [disabled]="isButtonDisabled">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

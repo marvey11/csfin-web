@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit(): void {
         this.dashboardCards = [
+            { header: "Exchanges", description: "Manage exchanges.", link: "/exchanges" },
             { header: "Securities", description: "Manage securities and their metadata.", link: "/securities" }
         ];
     }
