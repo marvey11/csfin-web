@@ -2,8 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Security } from "src/app/shared/models";
-import { SecurityAdapter } from "src/app/shared/models/security.model";
+import { Security, SecurityAdapter } from "src/app/shared/models";
 import { environment } from "src/environments/environment";
 
 @Injectable({
