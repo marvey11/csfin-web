@@ -1,0 +1,8 @@
+.main-content-with-header {
+  position: absolute;
+  top: 64px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  overflow: auto;
+}
