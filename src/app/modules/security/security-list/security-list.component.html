@@ -52,6 +52,8 @@
         </ng-template>
       </table>
 
+      <app-loader message="Loading Securities..."></app-loader>
+
       <button class="btn btn-danger" (click)="toggleGrouping()">
         <ng-template [ngIf]="groupingEnabled" [ngIfElse]="showUngrouped"><span>Show Ungrouped</span></ng-template>
         <ng-template #showUngrouped><span>Group by Type</span></ng-template>
