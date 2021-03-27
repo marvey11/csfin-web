@@ -1,0 +1,22 @@
+#sidebar-container {
+  position: absolute;
+  top: 64px;
+  width: 320px;
+  bottom: 0px;
+  left: 0px;
+}
+
+li {
+  background-color: lightgray;
+}
+
+li:hover,
+li:active {
+  background-color: darkgray;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+  font-weight: bolder;
+}

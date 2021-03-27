@@ -1,8 +1,10 @@
-<app-header *ngIf="displayHeader"></app-header>
+<app-header *ngIf="showHeader"></app-header>
+<app-sidebar *ngIf="showSidebar"></app-sidebar>
 
 <div
   [ngClass]="{
-    'main-content-with-header': displayHeader
+    'main-content-with-header': showHeader,
+    'main-content-with-header-and-sidebar': showHeader && showSidebar
   }"
 >
   <router-outlet></router-outlet>

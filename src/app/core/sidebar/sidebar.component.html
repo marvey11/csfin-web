@@ -1,0 +1,7 @@
+<div class="container p-1 bg-light text-dark" id="sidebar-container">
+  <ul class="nav nav-pills d-grid gap-1">
+    <li class="nav-item" *ngFor="let item of sidebarItems">
+      <a class="nav-link" routerLink="{{ item.link }}">{{ item.label }}</a>
+    </li>
+  </ul>
+</div>
