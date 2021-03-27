@@ -1,6 +1,7 @@
-import { stringify } from "@angular/compiler/src/util";
 import { Component, OnInit } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 import { SecurityService } from "src/app/core/http";
+import { LoaderService } from "src/app/core/services";
 import { Security } from "src/app/shared/models";
 import { SecurityType } from "src/app/shared/models/security.model";
 
@@ -10,6 +11,8 @@ import { SecurityType } from "src/app/shared/models/security.model";
     styleUrls: ["./security-list.component.css"]
 })
 export class SecurityListComponent implements OnInit {
+    isLoading: BehaviorSubject<boolean> = this.loaderService.isLoading;
+
     securities: Security[] = [];
 
     /** Whether or not to group securities by type. */
@@ -21,7 +24,7 @@ export class SecurityListComponent implements OnInit {
     /** The label that's used for the type in the ungrouped display. */
     typeLabels: Map<SecurityType, string>;
 
-    constructor(private service: SecurityService) {
+    constructor(private loaderService: LoaderService, private service: SecurityService) {
         this.groupLabels = new Map<SecurityType, string>([
             [SecurityType.STOCK, "Stocks"],
             [SecurityType.ETF, "ETFs"]
