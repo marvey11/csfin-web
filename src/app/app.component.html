@@ -1,1 +1,9 @@
-<router-outlet></router-outlet>
+<app-header *ngIf="displayHeader"></app-header>
+
+<div
+  [ngClass]="{
+    'main-content-with-header': displayHeader
+  }"
+>
+  <router-outlet></router-outlet>
+</div>

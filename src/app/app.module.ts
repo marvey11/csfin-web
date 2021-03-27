@@ -1,15 +1,13 @@
-import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { RouterModule, Routes } from "@angular/router";
+import { RouterModule } from "@angular/router";
+import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { CoreModule } from "./core/core.module";
 
-const appRoutes: Routes = [];
-
 @NgModule({
     declarations: [AppComponent],
-    imports: [BrowserModule, HttpClientModule, RouterModule.forRoot(appRoutes), CoreModule],
+    imports: [BrowserModule, RouterModule.forRoot([]), AppRoutingModule, CoreModule],
     providers: [],
     bootstrap: [AppComponent]
 })
