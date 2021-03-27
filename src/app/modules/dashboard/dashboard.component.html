@@ -1,0 +1,14 @@
+<div class="container">
+  <h1 class="fw-bolder">CSFin Dashboard</h1>
+  <div class="row">
+    <div class="card text-center" *ngFor="let card of dashboardCards">
+      <div class="card-body d-grid">
+        <h4 class="card-title bg-danger text-light">{{ card.header }}</h4>
+        <p class="card-text">{{ card.description }}</p>
+        <button routerLink="{{ card.link }}" class="btn btn-secondary btn-block text-white fw-bold stretched-link">
+          Select
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

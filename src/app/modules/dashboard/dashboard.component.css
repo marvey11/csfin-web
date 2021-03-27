@@ -1,0 +1,31 @@
+.container {
+  padding-top: 16px;
+}
+
+.row {
+  padding: 7px;
+}
+
+.card {
+  width: 256px;
+  padding: 4px;
+  margin: 4px;
+  border: dotted thin gray;
+}
+
+.card:hover {
+  background-color: lightgrey;
+}
+
+.card-body {
+  padding: 0;
+}
+
+.card-body h4 {
+  padding: 8px;
+}
+
+.card-text {
+  height: 140px;
+  padding: 8px;
+}
