@@ -6,10 +6,11 @@ import { HeaderComponent } from "./header/header.component";
 import { DashboardModule } from "../modules/dashboard/dashboard.module";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { RouterModule } from "@angular/router";
+import { FooterComponent } from "./footer/footer.component";
 
 @NgModule({
-    declarations: [HeaderComponent, SidebarComponent],
+    declarations: [HeaderComponent, SidebarComponent, FooterComponent],
     imports: [RouterModule, HttpClientModule, CommonModule, DashboardModule, SecurityModule],
-    exports: [HeaderComponent, SidebarComponent]
+    exports: [HeaderComponent, SidebarComponent, FooterComponent]
 })
 export class CoreModule {}

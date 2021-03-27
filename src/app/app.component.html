@@ -1,11 +1,14 @@
-<app-header *ngIf="showHeader"></app-header>
+<app-header *ngIf="showHeaderFooter"></app-header>
 <app-sidebar *ngIf="showSidebar"></app-sidebar>
 
 <div
+  class="pt-3 pb-3"
   [ngClass]="{
-    'main-content-with-header': showHeader,
-    'main-content-with-header-and-sidebar': showHeader && showSidebar
+    'main-content-header-footer': showHeaderFooter,
+    'main-content-header-footer-sidebar': showHeaderFooter && showSidebar
   }"
 >
   <router-outlet></router-outlet>
 </div>
+
+<app-footer *ngIf="showHeaderFooter"></app-footer>

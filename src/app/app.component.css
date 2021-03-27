@@ -1,17 +1,17 @@
-.main-content-with-header {
+.main-content-header-footer {
   position: absolute;
   top: 64px;
   right: 0px;
-  bottom: 0px;
+  bottom: 40px;
   left: 0px;
   overflow: auto;
 }
 
-.main-content-with-header-and-sidebar {
+.main-content-header-footer-sidebar {
   position: absolute;
   top: 64px;
   right: 0px;
-  bottom: 0px;
+  bottom: 40px;
   left: 320px;
   overflow: auto;
 }

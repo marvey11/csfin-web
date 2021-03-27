@@ -9,7 +9,7 @@ import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 export class AppComponent implements OnInit {
     title = "codescape-financial-web";
 
-    showHeader = false;
+    showHeaderFooter = false;
     showSidebar = false;
 
     constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
     ngOnInit(): void {
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
-                this.showHeader = this.activatedRoute.firstChild?.snapshot.data.showHeader !== false;
+                this.showHeaderFooter = this.activatedRoute.firstChild?.snapshot.data.showHeaderFooter !== false;
                 this.showSidebar = this.activatedRoute.firstChild?.snapshot.data.showSidebar !== false;
             }
         });
