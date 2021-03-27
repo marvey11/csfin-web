@@ -17,8 +17,12 @@
                 <th scope="row" colspan="4">{{ groupLabels.get(group.key) || "Unkown" }}</th>
               </tr>
               <tr *ngFor="let s of getSorted(group.value)">
-                <td>{{ s.isin }}</td>
-                <td>{{ s.nsin }}</td>
+                <td>
+                  <span class="mono-fixed fw-bold text-muted">{{ s.isin }}</span>
+                </td>
+                <td>
+                  <span class="mono-fixed fw-bold text-muted">{{ s.nsin }}</span>
+                </td>
                 <td>{{ s.name }}</td>
               </tr>
             </tbody>
@@ -35,8 +39,12 @@
           </thead>
           <tbody>
             <tr *ngFor="let s of getSorted(securities)">
-              <td>{{ s.isin }}</td>
-              <td>{{ s.nsin }}</td>
+              <td>
+                <span class="mono-fixed fw-bold text-muted">{{ s.isin }}</span>
+              </td>
+              <td>
+                <span class="mono-fixed fw-bold text-muted">{{ s.nsin }}</span>
+              </td>
               <td>{{ s.name }}</td>
               <td>{{ typeLabels.get(s.type) || "Unknown" }}</td>
             </tr>
@@ -45,7 +53,7 @@
       </table>
 
       <button class="btn btn-danger" (click)="toggleGrouping()">
-        <span *ngIf="groupingEnabled; else showUngrouped">Show Ungrouped</span>
+        <ng-template [ngIf]="groupingEnabled" [ngIfElse]="showUngrouped"><span>Show Ungrouped</span></ng-template>
         <ng-template #showUngrouped><span>Group by Type</span></ng-template>
       </button>
     </div>
