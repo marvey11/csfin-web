@@ -3,6 +3,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { DashboardModule } from "../modules/dashboard/dashboard.module";
+import { ExchangeModule } from "../modules/exchange/exchange.module";
 import { HomeModule } from "../modules/home/home.module";
 import { SecurityModule } from "../modules/security/security.module";
 import { FooterComponent } from "./footer/footer.component";
@@ -12,9 +13,19 @@ import { LoaderService } from "./services";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 
 @NgModule({
-    declarations: [HeaderComponent, SidebarComponent, FooterComponent],
-    imports: [RouterModule, HttpClientModule, CommonModule, DashboardModule, SecurityModule, HomeModule],
-    exports: [HeaderComponent, SidebarComponent, FooterComponent],
+    declarations: [FooterComponent, HeaderComponent, SidebarComponent],
+    imports: [
+        // Angular modules
+        CommonModule,
+        HttpClientModule,
+        RouterModule,
+        // project modules
+        DashboardModule,
+        ExchangeModule,
+        HomeModule,
+        SecurityModule
+    ],
+    exports: [FooterComponent, HeaderComponent, SidebarComponent],
     providers: [LoaderService, { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }]
 })
 export class CoreModule {}
