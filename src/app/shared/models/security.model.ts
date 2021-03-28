@@ -7,6 +7,40 @@ enum SecurityType {
     UNKNOWN = 99
 }
 
+function securityTypeFromString(typeString: string): SecurityType {
+    let type: SecurityType;
+
+    switch (typeString) {
+        case "stock":
+            type = SecurityType.STOCK;
+            break;
+        case "etf":
+            type = SecurityType.ETF;
+            break;
+        default:
+            type = SecurityType.UNKNOWN;
+            break;
+    }
+
+    return type;
+}
+
+function securityTypeToString(itype: SecurityType, plural: boolean = false): string {
+    let result: string;
+
+    switch (itype) {
+        case SecurityType.STOCK:
+            result = plural ? "Stocks" : "Stock";
+            break;
+        case SecurityType.ETF:
+            result = plural ? "ETFs" : "ETF";
+            break;
+        default:
+            result = "Unknown";
+    }
+    return result;
+}
+
 class Security {
     constructor(
         public id: number,
@@ -22,22 +56,8 @@ class Security {
 })
 class SecurityAdapter implements Adapter<Security> {
     adapt(item: any): Security {
-        let type: SecurityType;
-
-        switch (item.type) {
-            case "stock":
-                type = SecurityType.STOCK;
-                break;
-            case "etf":
-                type = SecurityType.ETF;
-                break;
-            default:
-                type = SecurityType.UNKNOWN;
-                break;
-        }
-
-        return new Security(item.id, item.isin, item.nsin, item.name, type);
+        return new Security(item.id, item.isin, item.nsin, item.name, securityTypeFromString(item.type));
     }
 }
 
-export { Security, SecurityAdapter, SecurityType };
+export { Security, SecurityAdapter, SecurityType, securityTypeFromString, securityTypeToString };
