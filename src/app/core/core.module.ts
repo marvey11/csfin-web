@@ -9,7 +9,7 @@ import { HomeModule } from "../modules/home/home.module";
 import { SecurityModule } from "../modules/security/security.module";
 import { FooterComponent } from "./footer/footer.component";
 import { HeaderComponent } from "./header/header.component";
-import { LoaderInterceptor } from "./interceptors";
+import { HttpErrorInterceptor, LoaderInterceptor } from "./interceptors";
 import { LoaderService, StatusService } from "./services";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 
@@ -28,6 +28,11 @@ import { SidebarComponent } from "./sidebar/sidebar.component";
         SecurityModule
     ],
     exports: [FooterComponent, HeaderComponent, SidebarComponent],
-    providers: [LoaderService, StatusService, { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }]
+    providers: [
+        LoaderService,
+        StatusService,
+        { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+    ]
 })
 export class CoreModule {}
