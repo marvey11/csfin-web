@@ -10,6 +10,7 @@ import { Exchange } from "src/app/shared/models";
 })
 export class CreateExchangeComponent implements OnInit {
     form!: FormGroup;
+    exchangeName!: FormControl;
 
     constructor(private service: ExchangeService, private fb: FormBuilder) {}
 
@@ -17,20 +18,17 @@ export class CreateExchangeComponent implements OnInit {
         return !this.form.valid;
     }
 
-    get exchangeName(): AbstractControl | null {
-        return this.form.get("exchangeName");
-    }
-
     onSubmit(): void {
-        const exchange = new Exchange(-1, this.exchangeName?.value);
+        const exchange = new Exchange(-1, this.exchangeName.value);
         this.service.create(exchange).subscribe(() => {
             this.form.reset();
         });
     }
 
     ngOnInit(): void {
+        this.exchangeName = new FormControl("", [Validators.minLength(3), Validators.required]);
         this.form = this.fb.group({
-            exchangeName: new FormControl("", [Validators.minLength(3), Validators.required])
+            exchangeName: this.exchangeName
         });
     }
 }
