@@ -3,12 +3,3 @@
 .mono-fixed {
   font-family: "Courier New", Courier, monospace;
 }
-
-.ng-valid[required],
-.ng-valid.required {
-  border-right: 4px solid green;
-}
-
-.form-control.ng-invalid:not(form) {
-  border-right: 4px solid red;
-}
