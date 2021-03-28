@@ -54,7 +54,7 @@
 
       <app-loader message="Loading securities..."></app-loader>
 
-      <button *ngIf="!(isLoading | async)" class="btn btn-primary" (click)="toggleGrouping()">
+      <button *ngIf="(isLoading | async) === false" class="btn btn-primary" (click)="toggleGrouping()">
         <ng-template [ngIf]="groupingEnabled" [ngIfElse]="showUngrouped"><span>Show Ungrouped</span></ng-template>
         <ng-template #showUngrouped><span>Group by Type</span></ng-template>
       </button>
