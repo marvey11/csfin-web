@@ -18,7 +18,8 @@ export class SidebarComponent implements OnInit {
     ngOnInit(): void {
         this.sidebarItems = [
             { label: "Exchanges", link: "/exchanges" },
-            { label: "Securities", link: "/securities" }
+            { label: "Securities", link: "/securities" },
+            { label: "Performance Evaluation", link: "/evaluate/performance" }
         ];
     }
 }
