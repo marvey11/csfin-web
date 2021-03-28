@@ -3,9 +3,9 @@
     <h1 class="card-header">Performance Evaluation</h1>
     <div class="card-body">
       <form [formGroup]="form">
-        <div class="d-flex align-items-center py-2 mx-0 my-3" style="background-color: lightgray">
+        <div class="d-flex align-items-center py-2 mx-0 my-3" style="background-color: lightgrey">
           <label for="interval-selector" class="p-2">Select Interval:</label>
-          <div class="p-2 flex-grow">
+          <div class="p-2">
             <select
               id="interval-selector"
               class="form-control"
@@ -41,8 +41,8 @@
         </thead>
         <ng-template [ngIf]="groupingEnabled" [ngIfElse]="nogroups">
           <tbody *ngFor="let group of groupedItems | keyvalue">
-            <tr class="group-header">
-              <th scope="row" colspan="5">{{ getLabel(group.key, true) || "Unkown" }}</th>
+            <tr style="background-color: lightgrey">
+              <th scope="row" colspan="5">{{ getLabel(group.key, true) }}</th>
             </tr>
             <tr *ngFor="let item of getSortedItems(group.value)">
               <td>
