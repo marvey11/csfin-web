@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { BehaviorSubject } from "rxjs";
 import { SecurityService } from "src/app/core/http";
 import { LoaderService } from "src/app/core/services";
 import { Security } from "src/app/shared/models";
-import { SecurityType } from "src/app/shared/models/security.model";
+import { SecurityType, securityTypeToString } from "src/app/shared/models/security.model";
 
 @Component({
     selector: "app-security-list",
@@ -13,49 +14,43 @@ import { SecurityType } from "src/app/shared/models/security.model";
 export class SecurityListComponent implements OnInit {
     isLoading: BehaviorSubject<boolean> = this.loaderService.isLoading;
 
-    securities: Security[] = [];
+    securities: Security[];
 
-    /** Whether or not to group securities by type. */
-    groupingEnabled = true;
+    form!: FormGroup;
 
-    /** The group label that's displayed in the table when securities are grouped. */
-    groupLabels: Map<SecurityType, string>;
+    groupingToggle!: FormControl;
 
-    /** The label that's used for the type in the ungrouped display. */
-    typeLabels: Map<SecurityType, string>;
-
-    constructor(private loaderService: LoaderService, private service: SecurityService) {
-        this.groupLabels = new Map<SecurityType, string>([
-            [SecurityType.STOCK, "Stocks"],
-            [SecurityType.ETF, "ETFs"]
-        ]);
-        this.typeLabels = new Map<SecurityType, string>([
-            [SecurityType.STOCK, "Stock"],
-            [SecurityType.ETF, "ETF"]
-        ]);
+    constructor(private service: SecurityService, private fb: FormBuilder, private loaderService: LoaderService) {
+        this.securities = [];
     }
 
-    toggleGrouping(): void {
-        this.groupingEnabled = !this.groupingEnabled;
+    get groupingEnabled(): boolean {
+        return this.groupingToggle.value;
     }
 
-    get groupedSecurities(): Map<SecurityType, Security[]> {
-        const mapping: Map<SecurityType, Security[]> = new Map<SecurityType, Security[]>();
+    get groupedItems(): Map<SecurityType, Security[]> {
+        const mapping = new Map<SecurityType, Security[]>();
 
-        for (const s of this.securities) {
-            const secs = mapping.get(s.type);
-            if (secs === undefined) {
-                mapping.set(s.type, [s]);
+        for (const item of this.securities) {
+            const key = item.type;
+            const value = mapping.get(key);
+
+            if (value === undefined) {
+                mapping.set(item.type, [item]);
             } else {
-                secs.push(s);
+                value.push(item);
             }
         }
 
         return mapping;
     }
 
-    getSorted(securities: Security[]): Security[] {
+    getSortedItems(securities: Security[]): Security[] {
         return securities.sort((s1: Security, s2: Security) => s1.isin.localeCompare(s2.isin));
+    }
+
+    getLabel(itype: SecurityType, plural = false): string {
+        return securityTypeToString(itype, plural);
     }
 
     loadSecurities(): void {
@@ -68,6 +63,12 @@ export class SecurityListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.groupingToggle = new FormControl(true);
+
+        this.form = this.fb.group({
+            showGrouped: this.groupingToggle
+        });
+
         this.loadSecurities();
     }
 }
