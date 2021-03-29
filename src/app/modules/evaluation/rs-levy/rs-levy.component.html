@@ -19,48 +19,48 @@
 
       <table class="table table-striped table-hover" *ngIf="(isLoading | async) === false; else loading">
         <thead>
-            <tr>
-              <th scope="col">ISIN</th>
-              <th scope="col">Name</th>
-              <th scope="col" class="text-center" *ngIf="groupingEnabled === false">Type</th>
-              <th scope="col">Exchange</th>
-              <th scope="col">Date</th>
-              <th scope="col" style="text-align: right">RSL</th>
-            </tr>
-          </thead>
-  
-          <ng-template [ngIf]="groupingEnabled" [ngIfElse]="nogroups">
-            <tbody *ngFor="let group of groupedItems | keyvalue">
-              <tr style="background-color: lightgrey">
-                <th scope="row" colspan="5">{{ getLabel(group.key, true) }}</th>
-              </tr>
-              <tr *ngFor="let item of getSortedItems(group.value)">
-                <td>
-                  <span class="mono-fixed fw-bold text-muted">{{ item.isin }}</span>
-                </td>
-                <td>{{ item.name }}</td>
-                <td>{{ item.exchange }}</td>
-                <td>{{ item.newestWeeklyCloseDate.toDateString() }}</td>
-                <td style="text-align: right">{{ getLevyPercent(item) | number: "1.2-2" }} %</td>
-              </tr>
-            </tbody>
-          </ng-template>
+          <tr>
+            <th scope="col">ISIN</th>
+            <th scope="col">Name</th>
+            <th scope="col" class="text-center" *ngIf="groupingEnabled === false">Type</th>
+            <th scope="col">Exchange</th>
+            <th scope="col">Date</th>
+            <th scope="col" style="text-align: right">RSL</th>
+          </tr>
+        </thead>
 
-          <ng-template #nogroups>
-            <tbody>
-              <tr *ngFor="let item of getSortedItems(rslResponseItems)">
-                <td>
-                  <span class="mono-fixed fw-bold text-muted">{{ item.isin }}</span>
-                </td>
-                <td>{{ item.name }}</td>
-                <td class="text-center">{{ getLabel(item.itype) }}</td>
-                <td>{{ item.exchange }}</td>
-                <td>{{ item.newestWeeklyCloseDate.toDateString() }}</td>
-                <td style="text-align: right">{{ getLevyPercent(item) | number: "1.2-2" }} %</td>
-              </tr>
-            </tbody>
-          </ng-template>
-          </table>
+        <ng-template [ngIf]="groupingEnabled" [ngIfElse]="nogroups">
+          <tbody *ngFor="let group of groupedItems | keyvalue">
+            <tr style="background-color: lightgrey">
+              <th scope="row" colspan="5">{{ getLabel(group.key, true) }}</th>
+            </tr>
+            <tr *ngFor="let item of getSortedItems(group.value)">
+              <td>
+                <span class="mono-fixed fw-bold text-muted">{{ item.isin }}</span>
+              </td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.exchange }}</td>
+              <td>{{ item.newestWeeklyCloseDate.toDateString() }}</td>
+              <td style="text-align: right">{{ getLevyPercent(item) | number: "1.2-2" }} %</td>
+            </tr>
+          </tbody>
+        </ng-template>
+
+        <ng-template #nogroups>
+          <tbody>
+            <tr *ngFor="let item of getSortedItems(rslResponseItems)">
+              <td>
+                <span class="mono-fixed fw-bold text-muted">{{ item.isin }}</span>
+              </td>
+              <td>{{ item.name }}</td>
+              <td class="text-center">{{ getLabel(item.itype) }}</td>
+              <td>{{ item.exchange }}</td>
+              <td>{{ item.newestWeeklyCloseDate.toDateString() }}</td>
+              <td style="text-align: right">{{ getLevyPercent(item) | number: "1.2-2" }} %</td>
+            </tr>
+          </tbody>
+        </ng-template>
+      </table>
 
       <ng-template #loading>
         <app-spinner-loader></app-spinner-loader>
