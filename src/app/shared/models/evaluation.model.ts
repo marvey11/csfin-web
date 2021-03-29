@@ -37,4 +37,29 @@ type PerformanceInterval = {
     label: string;
 };
 
-export { PerformanceEvaluationItem, PerformanceEvaluationItemAdapter, PerformanceInterval };
+class RSLevyResponseItem {
+    constructor(
+        public isin: string,
+        public name: string,
+        public itype: SecurityType,
+        public exchange: string,
+        public newestWeeklyCloseDate: Date,
+        public rslValue: number
+    ) {}
+}
+
+@Injectable({ providedIn: "root" })
+class RSLevyAdapter implements Adapter<RSLevyResponseItem> {
+    adapt(item: any): RSLevyResponseItem {
+        return new RSLevyResponseItem(
+            item.securityISIN,
+            item.securityName,
+            securityTypeFromString(item.instrumentType),
+            item.exchangeName,
+            new Date(item.newestWeeklyClose),
+            Number(item.rslValue)
+        );
+    }
+}
+
+export { PerformanceEvaluationItem, PerformanceEvaluationItemAdapter, PerformanceInterval, RSLevyResponseItem, RSLevyAdapter };
