@@ -45,11 +45,11 @@ export class RSLevyComponent implements OnInit {
     }
 
     getSortedItems(items: RSLevyResponseItem[]): RSLevyResponseItem[] {
-        return items.sort((it1, it2) => it2.rslValue-it1.rslValue);
+        return items.sort((it1, it2) => it2.rslValue - it1.rslValue);
     }
 
     getLevyPercent(item: RSLevyResponseItem): number {
-        return 100*item.rslValue;
+        return 100 * item.rslValue;
     }
 
     getLabel(itype: SecurityType, plural = false): string {
