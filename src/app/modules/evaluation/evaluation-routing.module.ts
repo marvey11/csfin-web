@@ -11,7 +11,7 @@ const routes: Routes = [
     {
         path: "evaluate/rs-levy",
         component: RSLevyComponent
-    },
+    }
 ];
 
 @NgModule({

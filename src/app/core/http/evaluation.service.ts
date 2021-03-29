@@ -21,8 +21,8 @@ export class EvaluationService {
         private adapterRSLevy: RSLevyAdapter
     ) {}
 
-    list(interval: PerformanceInterval): Observable<PerformanceEvaluationItem[]> {
-        const url = `${environment.apiURL}/evaluate/performance`;
+    getPerformanceData(interval: PerformanceInterval): Observable<PerformanceEvaluationItem[]> {
+        const url = `${environment.apiURL}/evaluate/performance-data`;
         const p = new HttpParams().set("interval", JSON.stringify({ unit: interval.unit, count: interval.count }));
         return this.http
             .get<PerformanceEvaluationItem[]>(url, { params: p })

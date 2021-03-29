@@ -49,11 +49,11 @@ export class PerformanceComponent implements OnInit {
     }
 
     getSortedItems(items: PerformanceEvaluationItem[]): PerformanceEvaluationItem[] {
-        return items.sort((it1, it2) => it2.newestPrice / it2.basePrice - it1.newestPrice / it1.basePrice);
+        return items.sort((it1, it2) => it2.performance - it1.performance);
     }
 
     getPerformance(item: PerformanceEvaluationItem): number {
-        return 100 * (item.newestPrice / item.basePrice - 1);
+        return 100 * item.performance;
     }
 
     getLabel(itype: SecurityType, plural = false): string {
@@ -62,7 +62,7 @@ export class PerformanceComponent implements OnInit {
 
     loadPerformanceItems(interval: PerformanceInterval): void {
         this.performanceItems.length = 0;
-        this.service.list(interval).subscribe((items: PerformanceEvaluationItem[]) => {
+        this.service.getPerformanceData(interval).subscribe((items: PerformanceEvaluationItem[]) => {
             for (const item of items) {
                 this.performanceItems.push(item);
             }
