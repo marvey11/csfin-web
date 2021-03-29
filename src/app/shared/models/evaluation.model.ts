@@ -9,9 +9,7 @@ class PerformanceEvaluationItem {
         public type: SecurityType,
         public exchange: string,
         public newestDate: Date,
-        public newestPrice: number,
-        public baseDate: Date,
-        public basePrice: number
+        public performance: number
     ) {}
 }
 
@@ -24,9 +22,7 @@ class PerformanceEvaluationItemAdapter implements Adapter<PerformanceEvaluationI
             securityTypeFromString(item.instrumentType),
             item.exchangeName,
             new Date(item.newestDate),
-            Number(item.newestPrice),
-            new Date(item.baseDate),
-            Number(item.basePrice)
+            Number(item.performance)
         );
     }
 }
@@ -62,4 +58,10 @@ class RSLevyAdapter implements Adapter<RSLevyResponseItem> {
     }
 }
 
-export { PerformanceEvaluationItem, PerformanceEvaluationItemAdapter, PerformanceInterval, RSLevyResponseItem, RSLevyAdapter };
+export {
+    PerformanceEvaluationItem,
+    PerformanceEvaluationItemAdapter,
+    PerformanceInterval,
+    RSLevyResponseItem,
+    RSLevyAdapter
+};
