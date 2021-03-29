@@ -19,7 +19,8 @@ export class SidebarComponent implements OnInit {
         this.sidebarItems = [
             { label: "Exchanges", link: "/exchanges" },
             { label: "Securities", link: "/securities" },
-            { label: "Performance Evaluation", link: "/evaluate/performance" }
+            { label: "Performance Evaluation", link: "/evaluate/performance" },
+            { label: "RSL", link: "/evaluate/rs-levy" }
         ];
     }
 }
