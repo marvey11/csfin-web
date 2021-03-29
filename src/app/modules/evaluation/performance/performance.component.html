@@ -28,7 +28,7 @@
         </div>
       </form>
 
-      <table class="table table-striped table-hover" *ngIf="(isLoading | async) === false">
+      <table class="table table-striped table-hover" *ngIf="(isLoading | async) === false; else loading">
         <thead>
           <tr>
             <th scope="col">ISIN</th>
@@ -71,7 +71,9 @@
         </ng-template>
       </table>
 
-      <app-loader message="Loading performance data..."></app-loader>
+      <ng-template #loading>
+        <app-spinner-loader></app-spinner-loader>
+      </ng-template>
     </div>
   </div>
 </div>

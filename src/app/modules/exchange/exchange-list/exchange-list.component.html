@@ -2,7 +2,7 @@
   <div class="card">
     <h1 class="card-header">List of Security Exchanges</h1>
     <div class="card-body">
-      <table *ngIf="exchangesObs$ | async as exchanges" class="table table-striped table-hover">
+      <table class="table table-striped table-hover" *ngIf="exchangesObs$ | async as exchanges; else loading">
         <thead>
           <tr>
             <th scope="col">Name</th>
@@ -15,7 +15,9 @@
         </tbody>
       </table>
 
-      <app-loader message="Loading exchanges..."></app-loader>
+      <ng-template #loading>
+        <app-spinner-loader></app-spinner-loader>
+      </ng-template>
 
       <button class="btn btn-primary" routerLink="/exchange/create" [disabled]="isLoading | async">
         Create Security Exchange
