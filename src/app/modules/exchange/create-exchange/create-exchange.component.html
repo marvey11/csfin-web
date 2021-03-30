@@ -35,6 +35,9 @@
           </div>
         </div>
       </form>
+
+      <!-- status message is turned back off as soon as the form is changed again after it was already submitted -->
+      <app-status-message *ngIf="!(form.dirty || form.touched)"></app-status-message>
     </div>
   </div>
 </div>
