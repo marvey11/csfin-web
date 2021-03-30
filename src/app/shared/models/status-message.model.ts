@@ -9,7 +9,7 @@ export enum StatusType {
 export class StatusMessage {
     private statusType: StatusType;
     private statusMessage: string;
-    private statusLabel: string
+    private statusLabel: string;
 
     public get type(): StatusType {
         return this.statusType;

@@ -12,7 +12,7 @@ export class StatusService {
         this.statusSubject = new BehaviorSubject<StatusMessage>(new StatusMessage());
     }
 
-    update(type: StatusType, message: string, label?: string) {
+    update(type: StatusType, message: string, label?: string): void {
         this.statusSubject.next(new StatusMessage(type, message, label));
     }
 
