@@ -78,7 +78,7 @@ export class PerformanceComponent implements OnInit {
             { unit: "month", count: 3, label: "3 months" },
             { unit: "month", count: 6, label: "6 months" },
             { unit: "year", count: 1, label: "1 year" },
-            { unit: "year", count: 5, label: "5 year" }
+            { unit: "year", count: 5, label: "5 years" }
         ];
 
         const initialInterval = this.intervals[1];
