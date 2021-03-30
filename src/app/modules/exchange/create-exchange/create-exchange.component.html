@@ -2,7 +2,7 @@
   <div class="card">
     <h1 class="card-header">Create Security Exchange</h1>
     <div class="card-body">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="was-validated">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="row my-2">
           <label for="exchange-name" class="col-2 col-form-label">Exchange Name:</label>
           <div class="col-10">
@@ -13,17 +13,20 @@
               type="text"
               minlength="3"
               required
-              [ngClass]="{ 'is-invalid': exchangeName.invalid }"
+              [ngClass]="{
+                'is-valid': exchangeName.valid,
+                'is-invalid': exchangeName.invalid && (exchangeName.touched || exchangeName.dirty)
+              }"
             />
             <div class="invalid-feedback">
-              <ng-template [ngIf]="exchangeName.errors?.minlength" [ngIfElse]="otherErrors">
-                <span>
+              <ng-template [ngIf]="exchangeName.errors?.required" [ngIfElse]="otherErrors">
+                <span>The Exchange Name is required.</span>
+              </ng-template>
+              <ng-template #otherErrors>
+                <span *ngIf="exchangeName.errors?.minlength">
                   The Exchange Name must be at least {{ exchangeName.errors?.minlength.requiredLength }} characters
                   long.
                 </span>
-              </ng-template>
-              <ng-template #otherErrors>
-                <span *ngIf="exchangeName.errors?.required">The Exchange Name is required.</span>
               </ng-template>
             </div>
           </div>
