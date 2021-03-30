@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit {
             { label: "Securities", link: "/securities" },
             { label: "Performance", link: "/evaluate/performance" },
             { label: "RSL", link: "/evaluate/rs-levy" },
-            { label: "Exchanges", link: "/exchanges" },
+            { label: "Exchanges", link: "/exchanges" }
         ];
     }
 }
