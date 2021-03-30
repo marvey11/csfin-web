@@ -24,7 +24,7 @@ export class RSLevyComponent implements OnInit {
     }
 
     get groupingEnabled(): boolean {
-        return this.groupingToggle.value;
+        return this.groupingToggle.value.showGrouped;
     }
 
     get groupedItems(): Map<SecurityType, RSLevyResponseItem[]> {
@@ -66,7 +66,7 @@ export class RSLevyComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.groupingToggle = new FormControl(true);
+        this.groupingToggle = new FormControl({ showGrouped: true });
 
         this.form = this.fb.group({
             showGrouped: this.groupingToggle

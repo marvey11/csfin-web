@@ -28,7 +28,7 @@ export class PerformanceComponent implements OnInit {
     }
 
     get groupingEnabled(): boolean {
-        return this.groupingToggle.value;
+        return this.groupingToggle.value.showGrouped;
     }
 
     get groupedItems(): Map<SecurityType, PerformanceEvaluationItem[]> {
@@ -84,7 +84,7 @@ export class PerformanceComponent implements OnInit {
         const initialInterval = this.intervals[1];
 
         this.intervalSelector = new FormControl("");
-        this.groupingToggle = new FormControl(true);
+        this.groupingToggle = new FormControl({ showGrouped: true });
 
         this.form = this.fb.group({
             performanceInterval: this.intervalSelector,

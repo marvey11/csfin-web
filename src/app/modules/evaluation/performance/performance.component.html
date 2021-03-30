@@ -16,14 +16,7 @@
             </select>
           </div>
           <div class="ms-auto p-2">
-            <input
-              id="grouping-toggle"
-              class="form-check-input"
-              type="checkbox"
-              [formControl]="groupingToggle"
-              value=""
-            />
-            <label class="form-check-label mx-2" for="grouping-toggle">Group Securities by Type</label>
+            <app-grouping-toggle [formControl]="groupingToggle"></app-grouping-toggle>
           </div>
         </div>
       </form>
