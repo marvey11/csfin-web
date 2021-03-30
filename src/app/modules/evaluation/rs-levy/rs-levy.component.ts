@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { BehaviorSubject } from "rxjs";
 import { EvaluationService } from "src/app/core/http";
-import { LoaderService } from "src/app/core/services";
-import { RSLevyResponseItem, SecurityType } from "src/app/shared/models";
+import { LoaderService, StatusService } from "src/app/core/services";
+import { RSLevyResponseItem, SecurityType, StatusType } from "src/app/shared/models";
 import { securityTypeToString } from "src/app/shared/models/security.model";
 
 @Component({
@@ -19,7 +19,12 @@ export class RSLevyComponent implements OnInit {
     form!: FormGroup;
     groupingToggle!: FormControl;
 
-    constructor(private fb: FormBuilder, private service: EvaluationService, private loaderService: LoaderService) {
+    constructor(
+        private service: EvaluationService,
+        private statusService: StatusService,
+        private loaderService: LoaderService,
+        private fb: FormBuilder
+    ) {
         this.rslResponseItems = [];
     }
 
@@ -58,11 +63,16 @@ export class RSLevyComponent implements OnInit {
 
     loadRSLevyResponses(): void {
         this.rslResponseItems.length = 0;
-        this.service.getRSLevyData().subscribe((items: RSLevyResponseItem[]) => {
-            for (const item of items) {
-                this.rslResponseItems.push(item);
+        this.service.getRSLevyData().subscribe(
+            (items: RSLevyResponseItem[]) => {
+                for (const item of items) {
+                    this.rslResponseItems.push(item);
+                }
+            },
+            (error) => {
+                this.statusService.update(StatusType.ERROR, error, "ERROR");
             }
-        });
+        );
     }
 
     ngOnInit(): void {

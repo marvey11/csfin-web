@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ExchangeService } from "src/app/core/http";
-import { Exchange } from "src/app/shared/models";
+import { StatusService } from "src/app/core/services";
+import { Exchange, StatusType } from "src/app/shared/models";
 
 @Component({
     selector: "app-create-exchange",
@@ -12,20 +13,30 @@ export class CreateExchangeComponent implements OnInit {
     form!: FormGroup;
     exchangeName!: FormControl;
 
-    constructor(private service: ExchangeService, private fb: FormBuilder) {}
+    constructor(private service: ExchangeService, private statusService: StatusService, private fb: FormBuilder) {}
 
     get isButtonDisabled(): boolean {
         return !this.form.valid;
     }
 
     onSubmit(): void {
+        this.statusService.reset();
+
         const exchange = new Exchange(-1, this.exchangeName.value);
-        this.service.create(exchange).subscribe(() => {
-            this.form.reset();
-        });
+        this.service.create(exchange).subscribe(
+            () => {
+                this.statusService.update(StatusType.SUCCESS, "Operation succeded", "SUCCESS");
+                this.form.reset();
+            },
+            (error) => {
+                this.statusService.update(StatusType.ERROR, JSON.stringify(error));
+            }
+        );
     }
 
     ngOnInit(): void {
+        this.statusService.reset();
+
         this.exchangeName = new FormControl("", [Validators.minLength(3), Validators.required]);
         this.form = this.fb.group({
             exchangeName: this.exchangeName

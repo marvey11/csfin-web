@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { BehaviorSubject } from "rxjs";
 import { EvaluationService } from "src/app/core/http";
-import { LoaderService } from "src/app/core/services";
-import { PerformanceEvaluationItem, PerformanceInterval, SecurityType } from "src/app/shared/models";
+import { LoaderService, StatusService } from "src/app/core/services";
+import { PerformanceEvaluationItem, PerformanceInterval, SecurityType, StatusType } from "src/app/shared/models";
 import { securityTypeToString } from "src/app/shared/models/security.model";
 
 @Component({
@@ -23,7 +23,12 @@ export class PerformanceComponent implements OnInit {
     intervalSelector!: FormControl;
     groupingToggle!: FormControl;
 
-    constructor(private fb: FormBuilder, private service: EvaluationService, private loaderService: LoaderService) {
+    constructor(
+        private service: EvaluationService,
+        private statusService: StatusService,
+        private loaderService: LoaderService,
+        private fb: FormBuilder
+    ) {
         this.performanceItems = [];
     }
 
@@ -62,11 +67,16 @@ export class PerformanceComponent implements OnInit {
 
     loadPerformanceItems(interval: PerformanceInterval): void {
         this.performanceItems.length = 0;
-        this.service.getPerformanceData(interval).subscribe((items: PerformanceEvaluationItem[]) => {
-            for (const item of items) {
-                this.performanceItems.push(item);
+        this.service.getPerformanceData(interval).subscribe(
+            (items: PerformanceEvaluationItem[]) => {
+                for (const item of items) {
+                    this.performanceItems.push(item);
+                }
+            },
+            (error) => {
+                this.statusService.update(StatusType.ERROR, error, "ERROR");
             }
-        });
+        );
     }
 
     onChange(interval: PerformanceInterval): void {
