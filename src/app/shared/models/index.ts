@@ -3,6 +3,7 @@ export {
     PerformanceEvaluationItemAdapter,
     PerformanceInterval,
     RSLevyAdapter,
+    RSLevyAlgorithm,
     RSLevyResponseItem
 } from "./evaluation.model";
 export { Exchange, ExchangeAdapter } from "./exchange.model";

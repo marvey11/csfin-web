@@ -7,6 +7,7 @@ import {
     PerformanceEvaluationItemAdapter,
     PerformanceInterval,
     RSLevyAdapter,
+    RSLevyAlgorithm,
     RSLevyResponseItem
 } from "src/app/shared/models";
 import { environment } from "src/environments/environment";
@@ -29,8 +30,11 @@ export class EvaluationService {
             .pipe(map((data: any[]) => data.map(this.adapter.adapt)));
     }
 
-    getRSLevyData(): Observable<RSLevyResponseItem[]> {
+    getRSLevyData(algorithm: RSLevyAlgorithm): Observable<RSLevyResponseItem[]> {
         const url = `${environment.apiURL}/evaluate/rsl-data`;
-        return this.http.get<RSLevyResponseItem[]>(url).pipe(map((data: any[]) => data.map(this.adapterRSLevy.adapt)));
+        const p = new HttpParams().set("algorithm", algorithm.algorithm);
+        return this.http
+            .get<RSLevyResponseItem[]>(url, { params: p })
+            .pipe(map((data: any[]) => data.map(this.adapterRSLevy.adapt)));
     }
 }

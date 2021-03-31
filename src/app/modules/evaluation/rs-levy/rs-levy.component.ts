@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { BehaviorSubject } from "rxjs";
 import { EvaluationService } from "src/app/core/http";
 import { LoaderService, StatusService } from "src/app/core/services";
-import { RSLevyResponseItem, SecurityType, StatusType } from "src/app/shared/models";
+import { RSLevyAlgorithm, RSLevyResponseItem, SecurityType, StatusType } from "src/app/shared/models";
 import { securityTypeToString } from "src/app/shared/models/security.model";
 
 @Component({
@@ -16,7 +16,10 @@ export class RSLevyComponent implements OnInit {
 
     rslResponseItems: RSLevyResponseItem[];
 
+    algorithms!: RSLevyAlgorithm[];
+
     form!: FormGroup;
+    algorithmSelector!: FormControl;
     groupingToggle!: FormControl;
 
     constructor(
@@ -61,11 +64,11 @@ export class RSLevyComponent implements OnInit {
         return securityTypeToString(itype, plural);
     }
 
-    loadRSLevyResponses(): void {
+    loadRSLevyResponses(algorithm: RSLevyAlgorithm): void {
         this.statusService.reset();
 
         this.rslResponseItems.length = 0;
-        this.service.getRSLevyData().subscribe(
+        this.service.getRSLevyData(algorithm).subscribe(
             (items: RSLevyResponseItem[]) => {
                 for (const item of items) {
                     this.rslResponseItems.push(item);
@@ -77,15 +80,29 @@ export class RSLevyComponent implements OnInit {
         );
     }
 
+    onChange(algorithm: RSLevyAlgorithm): void {
+        this.loadRSLevyResponses(algorithm);
+    }
+
     ngOnInit(): void {
         this.isLoading = this.loaderService.isLoading;
 
+        this.algorithms = [
+            { algorithm: "daily", label: "Latest day / 200 days average" },
+            { algorithm: "weekly", label: "Latest week / 27 weeks average" }
+        ];
+
+        const initialAlgorithm = this.algorithms[1];
+
+        this.algorithmSelector = new FormControl("");
         this.groupingToggle = new FormControl({ showGrouped: true });
 
         this.form = this.fb.group({
+            levyAlgorithm: this.algorithmSelector,
             showGrouped: this.groupingToggle
         });
+        this.form.controls.levyAlgorithm.setValue(initialAlgorithm, { onlySelf: true });
 
-        this.loadRSLevyResponses();
+        this.loadRSLevyResponses(initialAlgorithm);
     }
 }
