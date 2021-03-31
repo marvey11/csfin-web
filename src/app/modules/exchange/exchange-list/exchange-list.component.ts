@@ -10,7 +10,7 @@ import { Exchange } from "src/app/shared/models";
     styleUrls: ["./exchange-list.component.css"]
 })
 export class ExchangeListComponent implements OnInit {
-    isLoading: BehaviorSubject<boolean> = this.loaderService.isLoading;
+    isLoading!: BehaviorSubject<boolean>;
 
     exchangesObs$!: Observable<Exchange[]>;
 
@@ -21,6 +21,8 @@ export class ExchangeListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.isLoading = this.loaderService.isLoading;
+
         this.loadExchanges();
     }
 }

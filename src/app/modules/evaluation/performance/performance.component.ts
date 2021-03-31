@@ -12,7 +12,7 @@ import { securityTypeToString } from "src/app/shared/models/security.model";
     styleUrls: ["./performance.component.css"]
 })
 export class PerformanceComponent implements OnInit {
-    isLoading: BehaviorSubject<boolean> = this.loaderService.isLoading;
+    isLoading!: BehaviorSubject<boolean>;
 
     performanceItems: PerformanceEvaluationItem[];
 
@@ -66,6 +66,8 @@ export class PerformanceComponent implements OnInit {
     }
 
     loadPerformanceItems(interval: PerformanceInterval): void {
+        this.statusService.reset();
+
         this.performanceItems.length = 0;
         this.service.getPerformanceData(interval).subscribe(
             (items: PerformanceEvaluationItem[]) => {
@@ -84,6 +86,8 @@ export class PerformanceComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.isLoading = this.loaderService.isLoading;
+
         this.intervals = [
             { unit: "month", count: 3, label: "3 months" },
             { unit: "month", count: 6, label: "6 months" },
