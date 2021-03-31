@@ -58,10 +58,16 @@ class RSLevyAdapter implements Adapter<RSLevyResponseItem> {
     }
 }
 
+type RSLevyAlgorithm = {
+    algorithm: "daily" | "weekly";
+    label: string;
+};
+
 export {
     PerformanceEvaluationItem,
     PerformanceEvaluationItemAdapter,
     PerformanceInterval,
-    RSLevyResponseItem,
-    RSLevyAdapter
+    RSLevyAdapter,
+    RSLevyAlgorithm,
+    RSLevyResponseItem
 };

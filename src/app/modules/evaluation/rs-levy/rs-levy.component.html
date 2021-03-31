@@ -4,6 +4,17 @@
     <div class="card-body">
       <form [formGroup]="form">
         <div class="d-flex align-items-center py-2 mx-0 my-3" style="background-color: lightgrey">
+          <label for="algorithm-selector" class="p-2">Select Algorithm:</label>
+          <div class="p-2">
+            <select
+              id="algorithm-selector"
+              class="form-select"
+              [formControl]="algorithmSelector"
+              (ngModelChange)="onChange($event)"
+            >
+              <option *ngFor="let algo of algorithms" [ngValue]="algo">{{ algo.label }}</option>
+            </select>
+          </div>
           <div class="ms-auto p-2">
             <app-grouping-toggle [formControl]="groupingToggle"></app-grouping-toggle>
           </div>
