@@ -12,7 +12,7 @@ import { securityTypeToString } from "src/app/shared/models/security.model";
     styleUrls: ["./rs-levy.component.css"]
 })
 export class RSLevyComponent implements OnInit {
-    isLoading: BehaviorSubject<boolean> = this.loaderService.isLoading;
+    isLoading!: BehaviorSubject<boolean>;
 
     rslResponseItems: RSLevyResponseItem[];
 
@@ -62,6 +62,8 @@ export class RSLevyComponent implements OnInit {
     }
 
     loadRSLevyResponses(): void {
+        this.statusService.reset();
+
         this.rslResponseItems.length = 0;
         this.service.getRSLevyData().subscribe(
             (items: RSLevyResponseItem[]) => {
@@ -76,6 +78,8 @@ export class RSLevyComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.isLoading = this.loaderService.isLoading;
+
         this.groupingToggle = new FormControl({ showGrouped: true });
 
         this.form = this.fb.group({
