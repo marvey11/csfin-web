@@ -18,26 +18,27 @@
     "pre-commit": "yarn run build && yarn run lint && yarn run prettier:write"
   },
   "dependencies": {
-    "@angular/animations": "~11.2.3",
-    "@angular/common": "~11.2.3",
-    "@angular/compiler": "~11.2.3",
-    "@angular/core": "~11.2.3",
-    "@angular/forms": "~11.2.3",
-    "@angular/platform-browser": "~11.2.3",
-    "@angular/platform-browser-dynamic": "~11.2.3",
-    "@angular/router": "~11.2.3",
+    "@angular/animations": "~11.2.8",
+    "@angular/common": "~11.2.8",
+    "@angular/compiler": "~11.2.8",
+    "@angular/core": "~11.2.8",
+    "@angular/forms": "~11.2.8",
+    "@angular/platform-browser": "~11.2.8",
+    "@angular/platform-browser-dynamic": "~11.2.8",
+    "@angular/router": "~11.2.8",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1102.2",
-    "@angular/cli": "~11.2.2",
-    "@angular/compiler-cli": "~11.2.3",
+    "@angular-devkit/build-angular": "~0.1102.6",
+    "@angular/cli": "~11.2.6",
+    "@angular/compiler-cli": "~11.2.8",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "prettier": "^2.2.1",
+    "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.1.2"
+    "typescript": "~4.1.5"
   }
 }
