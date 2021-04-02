@@ -75,7 +75,7 @@ export class RSLevyComponent implements OnInit {
                 }
             },
             (error) => {
-                this.statusService.update(StatusType.ERROR, error, "ERROR");
+                this.statusService.update(StatusType.error, error, "ERROR");
             }
         );
     }
