@@ -24,6 +24,7 @@
       <table class="table table-striped table-hover" *ngIf="(isLoading | async) === false; else loading">
         <thead>
           <tr>
+            <th scope="col" style="text-align: right">#</th>
             <th scope="col">ISIN</th>
             <th scope="col">Name</th>
             <th scope="col" class="text-center" *ngIf="groupingEnabled === false">Type</th>
@@ -35,9 +36,10 @@
         <ng-template [ngIf]="groupingEnabled" [ngIfElse]="nogroups">
           <tbody *ngFor="let group of groupedItems | keyvalue">
             <tr style="background-color: lightgrey">
-              <th scope="row" colspan="5">{{ getLabel(group.key, true) }}</th>
+              <th scope="row" colspan="6">{{ getLabel(group.key, true) }}</th>
             </tr>
-            <tr *ngFor="let item of getSortedItems(group.value)">
+            <tr *ngFor="let item of getSortedItems(group.value); let i = index">
+              <td style="text-align: right">{{ i + 1 }}</td>
               <td>
                 <span class="mono-fixed fw-bold text-muted">{{ item.isin }}</span>
               </td>
@@ -50,7 +52,8 @@
         </ng-template>
         <ng-template #nogroups>
           <tbody>
-            <tr *ngFor="let item of getSortedItems(performanceItems)">
+            <tr *ngFor="let item of getSortedItems(performanceItems); let i = index">
+              <td style="text-align: right">{{ i + 1 }}</td>
               <td>
                 <span class="mono-fixed fw-bold text-muted">{{ item.isin }}</span>
               </td>
