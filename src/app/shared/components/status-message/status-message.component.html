@@ -1,12 +1,12 @@
 <div *ngIf="statusSubject | async as status">
   <div
-    *ngIf="status && status.type !== statusTypes.NONE"
+    *ngIf="status && status.type !== statusTypes.none"
     class="mt-3 alert"
     [ngClass]="{
-      'alert-success': status.type === statusTypes.SUCCESS,
-      'alert-info': status.type === statusTypes.INFORMATION,
-      'alert-warning': status.type === statusTypes.WARNING,
-      'alert-danger': status.type === statusTypes.ERROR
+      'alert-success': status.type === statusTypes.success,
+      'alert-info': status.type === statusTypes.information,
+      'alert-warning': status.type === statusTypes.warning,
+      'alert-danger': status.type === statusTypes.error
     }"
   >
     <div class="fw-bold mb-4" *ngIf="status && status.label">{{ status.label }}</div>

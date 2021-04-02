@@ -25,11 +25,11 @@ export class CreateExchangeComponent implements OnInit {
         const exchange = new Exchange(-1, this.exchangeName.value);
         this.service.create(exchange).subscribe(
             () => {
-                this.statusService.update(StatusType.SUCCESS, "Operation succeded", "SUCCESS");
+                this.statusService.update(StatusType.success, "Operation succeded", "SUCCESS");
                 this.form.reset();
             },
             (error) => {
-                this.statusService.update(StatusType.ERROR, JSON.stringify(error));
+                this.statusService.update(StatusType.error, JSON.stringify(error));
             }
         );
     }

@@ -2,44 +2,44 @@ import { Injectable } from "@angular/core";
 import { Adapter } from "src/app/core/adapter";
 
 enum SecurityType {
-    STOCK = 1,
-    ETF = 2,
-    UNKNOWN = 99
+    stock = 1,
+    etf = 2,
+    unknown = 99
 }
 
-function securityTypeFromString(typeString: string): SecurityType {
+const securityTypeFromString = (typeString: string): SecurityType => {
     let type: SecurityType;
 
     switch (typeString) {
         case "stock":
-            type = SecurityType.STOCK;
+            type = SecurityType.stock;
             break;
         case "etf":
-            type = SecurityType.ETF;
+            type = SecurityType.etf;
             break;
         default:
-            type = SecurityType.UNKNOWN;
+            type = SecurityType.unknown;
             break;
     }
 
     return type;
-}
+};
 
-function securityTypeToString(itype: SecurityType, plural: boolean = false): string {
+const securityTypeToString = (itype: SecurityType, plural: boolean = false): string => {
     let result: string;
 
     switch (itype) {
-        case SecurityType.STOCK:
+        case SecurityType.stock:
             result = plural ? "Stocks" : "Stock";
             break;
-        case SecurityType.ETF:
+        case SecurityType.etf:
             result = plural ? "ETFs" : "ETF";
             break;
         default:
             result = "Unknown";
     }
     return result;
-}
+};
 
 class Security {
     constructor(

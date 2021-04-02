@@ -1,9 +1,9 @@
 export enum StatusType {
-    NONE,
-    SUCCESS,
-    INFORMATION,
-    WARNING,
-    ERROR
+    none,
+    success,
+    information,
+    warning,
+    error
 }
 
 export class StatusMessage {
@@ -24,7 +24,7 @@ export class StatusMessage {
     }
 
     constructor(type?: StatusType, message?: string, label?: string) {
-        this.statusType = type || StatusType.NONE;
+        this.statusType = type || StatusType.none;
         this.statusMessage = message || "";
         this.statusLabel = label || "";
     }
